@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+  <h1>{{ article.title }}</h1>
+  <p>{{ article.content }}</p>
+  <form action="{{ url_for('main.delete_article', id=article.id) }}" method="POST" style="display:inline;">
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+  </form>
+  <a href="{{ url_for('main.index') }}" class="btn btn-secondary mt-3">Back</a>
+{% endblock %}

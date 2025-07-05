@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Edit Article</h2>
+  <form method="POST">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" id="title" value="{{ article.title }}" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <textarea name="content" id="content" rows="5" class="form-control">{{ article.content }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
