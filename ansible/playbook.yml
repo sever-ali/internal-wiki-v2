@@ -1,0 +1,36 @@
+---
+- name: Provision Wiki EC2 with Docker & K3s
+  hosts: wiki_servers
+  become: true
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Enable & start Docker
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Install K3s 
+      shell: |
+        curl -sfL https://get.k3s.io | sh -
+
+    - name: Copy Kubernetes manifests
+      copy:
+        src: ../k8s/
+        dest: /home/ubuntu/k8s/
+        owner: ubuntu
+        group: ubuntu
+        mode: 0755
+
+    - name: Apply Kubernetes manifests
+      shell: |
+        k3s kubectl apply -f /home/ubuntu/k8s/

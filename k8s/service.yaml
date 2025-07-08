@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: wiki-app-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: wiki-app
   ports:
     - protocol: TCP
       port: 5000
       targetPort: 5000
-      nodePort: 30500  # Any port between 30000-32767
+      nodePort: 30500  
