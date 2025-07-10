@@ -1,0 +1,53 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": null,
+    "title": "Wiki App Dashboard",
+    "tags": ["flask", "wiki", "monitoring"],
+    "timezone": "browser",
+    "schemaVersion": 30,
+    "version": 1,
+    "refresh": "5s",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "Total HTTP Requests (rate)",
+        "targets": [
+          {
+            "expr": "rate(request_count_created[5m])",
+            "legendFormat": "HTTP Requests Rate",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 }
+      },
+      {
+        "type": "graph",
+        "title": "CPU Usage (seconds)",
+        "targets": [
+          {
+            "expr": "rate(process_cpu_seconds_total[5m])",
+            "legendFormat": "CPU Seconds",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 }
+      },
+      {
+        "type": "graph",
+        "title": "Memory Usage (bytes)",
+        "targets": [
+          {
+            "expr": "process_resident_memory_bytes",
+            "legendFormat": "Memory",
+            "refId": "C"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 8, "w": 24, "h": 8 }
+      }
+    ]
+  }
+}

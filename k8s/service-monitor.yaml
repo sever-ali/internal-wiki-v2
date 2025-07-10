@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: wiki-app-servicemonitor
+  labels:
+    release: monitoring  
+spec:
+  selector:
+    matchLabels:
+      app: wiki-app
+  endpoints:
+    - port: http 
+      path: /metrics
+      interval: 15s
