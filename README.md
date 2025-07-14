@@ -55,7 +55,6 @@ run.py                    # Simple Flask app with Prometheus metrics
 ## 🚀 How To Deploy & Test
 
 ### ✅ 1️⃣Provision Infrastructure
-
 1. Install Terraform and configure your AWS credentials.
 2. Initialise & apply:
 
@@ -69,7 +68,6 @@ terraform apply
 
 
 ### ✅ 2️⃣ Configure & Deploy with Ansible
-
 1. Install Ansible.
 2. Update ansible/inventory.ini with your EC2 IP and SSH key path.
 3.Run the playbook:
@@ -82,14 +80,12 @@ ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
 This provisions Docker, K3s, and copies your K8s manifests.
 
 ### ✅ 3️⃣ Build & Push Docker Image (CI/CD)
-
 1. The .github/workflows/deploy.yml includes:
  - Checkout, build & push Docker image to Docker Hub.
 2. Pushing changes to main triggers this workflow automatically.
 
 
 ### ✅ 4️⃣ Deploy to K8s & Monitor
-
 1. Your Ansible playbook already places the manifests in the correct path on your EC2.
 2. SSH into the EC2 and apply them:
 
@@ -101,15 +97,10 @@ kubectl apply -f /home/ubuntu/k8s/
 
 
 ### ✅ 5️⃣ Verify
-
 - Visit http://<your-load-balancer-or-node-ip>:<nodePort> to confirm the wiki app is running.
 - Access /metrics to see Prometheus scrape data.
 - Connect Grafana dashboards if you extend monitoring later.
 
 ### ⚡ Notes
-
-- Never commit secrets like SSH keys or .pem files to your repo.
 - Adjust security groups to limit open ports in production.
 - Connect Grafana dashboards if you extend monitoring later.
-
-This project shows you can combine Terraform, Ansible, Docker, Kubernetes, and Prometheus to deliver a repeatable cloud deployment with observability.
